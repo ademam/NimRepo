@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NimClient.Utility;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,17 +7,29 @@ using System.Threading.Tasks;
 
 namespace NimClient.ViewModels
 {
-    internal class RowViewModel
+    internal class RowViewModel : BaseViewModel, INimRow
     {
         #region members
 
-        int _tokencount = 1;
+        int _tokencount;
+        RelayCommand _remove;
+
+        public RelayCommand Remove { get { return _remove ?? (_remove = new RelayCommand((obj) => RemoveToken())); } }
+
+        private void RemoveToken()
+        {
+            if (TokenCount > 0) TokenCount--;
+        }
 
         #endregion
 
         public int TokenCount
         {
-            set { _tokencount = value; }
+            set 
+            { 
+                _tokencount = value;
+                OnPropertyChanged("Tokens");
+            }
             get { return _tokencount; }
         }
 
@@ -39,7 +52,7 @@ namespace NimClient.ViewModels
 
         public RowViewModel(int tokencount)
         {
-
+            _tokencount = tokencount;
         }
     }
 }

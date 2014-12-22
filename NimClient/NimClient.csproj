@@ -103,6 +103,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utility\GameManager.cs" />
+    <Compile Include="Utility\INimRow.cs" />
     <Compile Include="Utility\RelayCommand.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\GameBoardViewModel.cs" />
