@@ -50,8 +50,9 @@
             <StackPanel>
                 <Button Content="Player Vs. Player" Click="PVP_Click"/>
                 <Button Content="Player Vs. AI" Command="{Binding Path=PVAIStart}" />
-                <Button Content="Explanation" Command="{Binding Path=Explanation}" />
+                <Button Content="Secret of Nim" Command="{Binding Path=Explanation}" />
                 <Button Content="History of Nim" Command="{Binding Path=History}" />
+                <Button Content="Quit" Tap="QuitButton_Tap" />
             </StackPanel>
 
         </Grid>

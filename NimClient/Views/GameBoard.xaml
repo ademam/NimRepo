@@ -23,8 +23,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="PVP Game" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Player 1 Turn" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="{Binding Path=GameType}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock Text="{Binding Path=GameMessage}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -35,8 +35,8 @@
                 <nim:RowView Name="row3" DataContext="{Binding Path=Row3}" Tap="RowView3_Tap"/>
                 <nim:RowView Name="row4" DataContext="{Binding Path=Row4}" Tap="RowView4_Tap"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Button Content="OK" Width="200" Tap="OKButton_Tap" />
-                    <Button Content="QUIT" Width="200" />
+                    <Button Content="OK" Width="200" Tap="OKButton_Tap" Command="{Binding Path=OKClick, UpdateSourceTrigger=Default}" />
+                    <Button Content="QUIT" Width="200" Click="QuitButton_Click" />
                 </StackPanel>
             </StackPanel>
         </Grid>

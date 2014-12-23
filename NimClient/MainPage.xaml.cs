@@ -28,6 +28,11 @@ namespace NimClient
             NavigationService.Navigate(uri);
         }
 
+        private void QuitButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Application.Current.Terminate();
+        }
+
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{

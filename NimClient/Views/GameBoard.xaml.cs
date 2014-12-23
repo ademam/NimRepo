@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using NimClient.ViewModels;
+using System.Windows.Data;
 
 namespace NimClient.Views
 {
@@ -53,6 +54,11 @@ namespace NimClient.Views
             row1.IsEnabled = false;
             row2.IsEnabled = false;
             row3.IsEnabled = false;
+        }
+
+        private void QuitButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }
