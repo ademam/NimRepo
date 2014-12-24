@@ -12,10 +12,14 @@ namespace NimClient.ViewModels
         private const string PLAYER_ONE_TURN = "Player 1 Turn";
         private const string PLAYER_TWO_TURN = "Player 2 Turn";
         private const string AI_TURN = "AI Turn";
+        private const string PLAYER_ONE_WINS = "Player 1 Wins!";
+        private const string PLAYER_TWO_WINS = "Player 2 Wins!";
+        private const string AI_WINS = "You Lose...";
         private const string PVP_GAME = "NIM PVP";
         private const string AI_GAME = "NIM Player Vs. AI";
 
         private bool _pvp = true;
+        private bool _isplayable = true;
 
         private string _gametype = string.Empty;
         private string _gamemessage = string.Empty;
@@ -37,6 +41,12 @@ namespace NimClient.ViewModels
             get { return _okclick ?? (_okclick = new RelayCommand((obj) => OKButtonClicked())); }
         }
 
+        public bool IsPlayable
+        {
+            set { _isplayable = value; OnPropertyChanged("IsPlayable"); }
+            get { return _isplayable; }
+        }
+
         public string GameType
         {
             set { _gametype = value; OnPropertyChanged("GameType"); }
@@ -51,7 +61,7 @@ namespace NimClient.ViewModels
 
         private void OKButtonClicked()
         {
-            if(_gametype == "NIM PVP")
+            if(_pvp)
             {
                 PVPGameNext();
             }
@@ -59,16 +69,32 @@ namespace NimClient.ViewModels
 
         private void PVPGameNext()
         {
-            if (_pvp)
+            if (IsPLayerOneTurn())
             {
-                if (IsPLayerOneTurn())
+                if (GameManager.IsVictory(new INimRow[] { _row1, _row2, _row3, _row4 }))
+                {
+                    IsPlayable = false;
+                    GameMessage = PLAYER_ONE_WINS;
+                }
+                else
                 {
                     GameMessage = PLAYER_TWO_TURN;
                 }
-                else GameMessage = PLAYER_ONE_TURN;
             }
-        }
-
+            else
+            {
+                if (GameManager.IsVictory(new INimRow[] { _row1, _row2, _row3, _row4 }))
+                {
+                    IsPlayable = false;
+                    GameMessage = PLAYER_TWO_WINS;
+                }
+                else
+                {
+                    GameMessage = PLAYER_ONE_TURN;
+                }
+            }
+        }      
+    
         private bool IsPLayerOneTurn()
         {
             if (_gamemessage == PLAYER_ONE_TURN) return true;

@@ -13,7 +13,7 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
-
+    
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -30,10 +30,12 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <nim:RowView Name="row1" DataContext="{Binding Path=Row1}" Tap="RowView1_Tap" />
-                <nim:RowView Name="row2" DataContext="{Binding Path=Row2}" Tap="RowView2_Tap"/>
-                <nim:RowView Name="row3" DataContext="{Binding Path=Row3}" Tap="RowView3_Tap"/>
-                <nim:RowView Name="row4" DataContext="{Binding Path=Row4}" Tap="RowView4_Tap"/>
+                <StackPanel Visibility="{Binding Path=IsPlayable, Converter={StaticResource BoolToVis}}">
+                    <nim:RowView Name="row1" DataContext="{Binding Path=Row1}" Tap="RowView1_Tap" />
+                    <nim:RowView Name="row2" DataContext="{Binding Path=Row2}" Tap="RowView2_Tap"/>
+                    <nim:RowView Name="row3" DataContext="{Binding Path=Row3}" Tap="RowView3_Tap"/>
+                    <nim:RowView Name="row4" DataContext="{Binding Path=Row4}" Tap="RowView4_Tap"/>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Content="OK" Width="200" Tap="OKButton_Tap" Command="{Binding Path=OKClick, UpdateSourceTrigger=Default}" />
                     <Button Content="QUIT" Width="200" Click="QuitButton_Click" />

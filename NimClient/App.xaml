@@ -8,6 +8,7 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:NimClient" x:Key="LocalizedStrings"/>
+        <local:BooleanToVisibilityConverter xmlns:local="clr-namespace:NimClient" x:Key="BoolToVis" />
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>
