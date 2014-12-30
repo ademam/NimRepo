@@ -10,8 +10,9 @@ namespace NimClient.Utility
     {
        public static bool IsVictory(INimRow[] rows)
         {
-            if ((from row in rows
-                 select row.TokenCount).Sum() == 1) return true;
+            int cnt = (from row in rows select row.TokenCount).Sum();
+
+            if (cnt == 1) return true;
             return false;
         }
     }

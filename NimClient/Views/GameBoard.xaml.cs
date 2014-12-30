@@ -17,6 +17,7 @@ namespace NimClient.Views
         public GameBoard()
         {
             InitializeComponent();
+            OK_Button.IsEnabled = false;
             this.DataContext = new GameBoardViewModel();
         }
 
@@ -25,6 +26,7 @@ namespace NimClient.Views
             row2.IsEnabled = false;
             row3.IsEnabled = false;
             row4.IsEnabled = false;
+            OK_Button.IsEnabled = true;
         }
 
         private void OKButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -33,6 +35,7 @@ namespace NimClient.Views
             row2.IsEnabled = true;
             row3.IsEnabled = true;
             row4.IsEnabled = true;
+            OK_Button.IsEnabled = false;
         }
 
         private void RowView2_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -40,6 +43,8 @@ namespace NimClient.Views
             row1.IsEnabled = false;
             row3.IsEnabled = false;
             row4.IsEnabled = false;
+            OK_Button.IsEnabled = true;
+
         }
 
         private void RowView3_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -47,6 +52,8 @@ namespace NimClient.Views
             row1.IsEnabled = false;
             row2.IsEnabled = false;
             row4.IsEnabled = false;
+            OK_Button.IsEnabled = true;
+
         }
 
         private void RowView4_Tap(object sender, System.Windows.Input.GestureEventArgs e)
@@ -54,6 +61,8 @@ namespace NimClient.Views
             row1.IsEnabled = false;
             row2.IsEnabled = false;
             row3.IsEnabled = false;
+            OK_Button.IsEnabled = true;
+
         }
 
         private void QuitButton_Click(object sender, RoutedEventArgs e)

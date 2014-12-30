@@ -13,37 +13,27 @@ namespace NimClient.ViewModels
 
         int _tokencount;
         RelayCommand _remove;
+        TokenViewModel[] _tokens;
 
         public RelayCommand Remove { get { return _remove ?? (_remove = new RelayCommand((obj) => RemoveToken())); } }
 
         private void RemoveToken()
         {
-            if (TokenCount > 0) TokenCount--;
+            if (_tokencount > 0) _tokencount--;
         }
 
         #endregion
 
         public int TokenCount
         {
-            set 
-            { 
-                _tokencount = value;
-                OnPropertyChanged("Tokens");
-            }
             get { return _tokencount; }
         }
 
-        public string Tokens
+        public TokenViewModel[] Tokens
         {
             get
             {
-                string tok = string.Empty;
-                for(int i = 0; i < TokenCount; i++)
-                {
-                    tok += "* ";
-                }
-
-                return tok;
+                return _tokens;
             }
         }
 
@@ -53,6 +43,19 @@ namespace NimClient.ViewModels
         public RowViewModel(int tokencount)
         {
             _tokencount = tokencount;
+            BuildTokens(tokencount);
+        }
+
+        private void BuildTokens(int tokencount)
+        {
+            List<TokenViewModel> tokens = new List<TokenViewModel>();
+ 	        for(int i = 0; i < tokencount; i++)
+            {
+                tokens.Add(new TokenViewModel(Remove));
+            }
+
+            _tokens = tokens.ToArray();
+            OnPropertyChanged("Tokens");
         }
     }
 }

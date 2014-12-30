@@ -110,11 +110,15 @@
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\GameBoardViewModel.cs" />
     <Compile Include="ViewModels\RowViewModel.cs" />
+    <Compile Include="ViewModels\TokenViewModel.cs" />
     <Compile Include="Views\GameBoard.xaml.cs">
       <DependentUpon>GameBoard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RowView.xaml.cs">
       <DependentUpon>RowView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Token.xaml.cs">
+      <DependentUpon>Token.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +135,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RowView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Token.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

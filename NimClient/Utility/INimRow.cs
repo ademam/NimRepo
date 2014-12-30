@@ -8,6 +8,6 @@ namespace NimClient.Utility
 {
     interface INimRow
     {
-        int TokenCount { set; get; }
+        int TokenCount { get; }
     }
 }

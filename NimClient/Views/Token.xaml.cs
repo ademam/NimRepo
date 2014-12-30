@@ -10,16 +10,18 @@ using Microsoft.Phone.Shell;
 
 namespace NimClient.Views
 {
-    public partial class RowView : UserControl
+    public partial class Token : UserControl
     {
-        public RowView()
+        public Token()
         {
             InitializeComponent();
         }
 
-        private void tokens_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void Token_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-
+            token.Content = " ";
+            this.IsEnabled = false;
+            ((Button)sender).GetBindingExpression(Button.CommandProperty).UpdateSource();
         }
     }
 }
