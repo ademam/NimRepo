@@ -16,10 +16,5 @@ namespace NimClient.Views
         {
             InitializeComponent();
         }
-
-        private void tokens_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-
-        }
     }
 }

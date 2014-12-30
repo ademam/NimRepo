@@ -22,7 +22,6 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <view:Token>
-                        
                     </view:Token>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

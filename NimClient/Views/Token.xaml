@@ -15,7 +15,6 @@
                    VerticalAlignment="Center"
                    FontSize="56"
                    Tap="Token_Tap"
-                   Command="{Binding Path=TokenTap, UpdateSourceTrigger=Explicit}"
                    BorderThickness="0">
         </Button>
     </Grid>
