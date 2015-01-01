@@ -14,6 +14,7 @@ namespace NimClient.Views
 {
     public partial class GameBoard : PhoneApplicationPage
     {
+        bool _pvp = true;
         public GameBoard()
         {
             InitializeComponent();
@@ -22,8 +23,9 @@ namespace NimClient.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            _pvp = bool.Parse(this.NavigationContext.QueryString["pvp"]);
             this.DataContext =
-                new GameBoardViewModel(bool.Parse(this.NavigationContext.QueryString["pvp"]));
+                new GameBoardViewModel(_pvp);
             base.OnNavigatedTo(e);
         }
 
@@ -42,6 +44,11 @@ namespace NimClient.Views
             row3.IsEnabled = true;
             row4.IsEnabled = true;
             OK_Button.IsEnabled = false;
+
+            ((GameBoardViewModel)this.DataContext).OKClick.Execute(null);
+
+            //BindingExpression be = ((Button)sender).GetBindingExpression(Button.CommandProperty);
+            //be.UpdateSource();
         }
 
         private void RowView2_Tap(object sender, System.Windows.Input.GestureEventArgs e)

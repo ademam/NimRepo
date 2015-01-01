@@ -38,7 +38,6 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                     <Button Name="OK_Button" Content="OK" Width="200" Tap="OKButton_Tap" 
-                            Command="{Binding Path=OKClick, UpdateSourceTrigger=Default}"
                             Visibility="{Binding Path=IsPlayable, Converter={StaticResource BoolToVis}}"/>
                     <Button Content="QUIT" Width="200" Click="QuitButton_Click" />
                 </StackPanel>
