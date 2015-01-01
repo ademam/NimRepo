@@ -10,7 +10,8 @@
     d:DesignHeight="50" d:DesignWidth="50">
     
     <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
-        <Button Name="token" Content="*"
+        <Button Name="token" Content="{Binding Path=Content}"
+                   IsEnabled="{Binding Path=Enabled}"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"
                    FontSize="56"

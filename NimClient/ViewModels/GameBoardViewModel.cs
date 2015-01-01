@@ -9,14 +9,22 @@ namespace NimClient.ViewModels
 {
     internal class GameBoardViewModel : BaseViewModel
     {
+        #region Constants
+
         private const string PLAYER_ONE_TURN = "Player 1 Turn";
         private const string PLAYER_TWO_TURN = "Player 2 Turn";
+        private const string PLAYER_TURN = "Player Turn";
         private const string AI_TURN = "AI Turn";
         private const string PLAYER_ONE_WINS = "Player 1 Wins!";
         private const string PLAYER_TWO_WINS = "Player 2 Wins!";
+        private const string PLAYER_WINS = "You Win!!";
         private const string AI_WINS = "You Lose...";
         private const string PVP_GAME = "NIM PVP";
         private const string AI_GAME = "NIM Player Vs. AI";
+
+        #endregion
+
+        #region Members
 
         private bool _pvp = true;
         private bool _isplayable = true;
@@ -30,6 +38,10 @@ namespace NimClient.ViewModels
         private RowViewModel _row4;
 
         private RelayCommand _okclick;
+
+        #endregion
+
+        #region Properties
 
         public RowViewModel Row1 { get { return _row1 ?? (_row1 = new RowViewModel(1)); } }
         public RowViewModel Row2 { get { return _row2 ?? (_row2 = new RowViewModel(3)); } }
@@ -59,11 +71,70 @@ namespace NimClient.ViewModels
             get { return _gamemessage; }
         }
 
+        #endregion
+
+        #region Constructors
+
+        public GameBoardViewModel() : this(true){}
+
+        public GameBoardViewModel(bool pvp)
+        {
+            if (pvp) SetupPVPGame();
+            else SetupAiGame();
+           
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void SetupAiGame()
+        {
+            _pvp = false;
+            GameMessage = PLAYER_TURN;
+            GameType = AI_GAME;
+
+            //AINext(); //todo Question first?
+        }
+
+        private void SetupPVPGame()
+        {
+            _pvp = true;
+            GameMessage = PLAYER_ONE_TURN;
+            GameType = PVP_GAME;
+        }
+
         private void OKButtonClicked()
         {
-            if(_pvp)
+            if (_pvp)
             {
                 PVPGameNext();
+            }
+            else AINext();
+        }
+
+        private void AINext()
+        {
+            if(GameManager.IsVictory(new INimRow[] { _row1, _row2, _row3, _row4 }))
+            {
+                IsPlayable = false;
+                GameMessage = PLAYER_WINS;
+            }
+            else
+            {
+                GameMessage = AI_TURN;
+
+                Task.
+                GameManager.CalculateAITurn(new INimRow[] { _row1, _row2, _row3, _row4 });
+                if(GameManager.IsVictory(new INimRow[] { _row1, _row2, _row3, _row4 }))
+                {
+                    IsPlayable = false;
+                    GameMessage = AI_WINS;
+                }
+                else
+                {
+                    GameMessage = PLAYER_TURN;
+                }
             }
         }
 
@@ -101,12 +172,7 @@ namespace NimClient.ViewModels
             return false;
         }
 
+        #endregion
 
-        public GameBoardViewModel()
-        {
-            _pvp = true;
-            GameMessage = PLAYER_ONE_TURN;
-            GameType = PVP_GAME;
-        }
     }
 }

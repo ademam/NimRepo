@@ -18,7 +18,13 @@ namespace NimClient.Views
         {
             InitializeComponent();
             OK_Button.IsEnabled = false;
-            this.DataContext = new GameBoardViewModel();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            this.DataContext =
+                new GameBoardViewModel(bool.Parse(this.NavigationContext.QueryString["pvp"]));
+            base.OnNavigatedTo(e);
         }
 
         private void RowView1_Tap(object sender, System.Windows.Input.GestureEventArgs e)

@@ -28,7 +28,13 @@ namespace NimClient
             NavigationService.Navigate(uri);
         }
 
-        private void QuitButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        private void PVAI_Click(object sender, RoutedEventArgs e)
+        {
+            Uri uri = new Uri("/Views/GameBoard.xaml?pvp=false", UriKind.Relative);
+            NavigationService.Navigate(uri);
+        }
+
+        private void Quit_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Terminate();
         }

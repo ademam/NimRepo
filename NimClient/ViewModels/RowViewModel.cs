@@ -57,5 +57,12 @@ namespace NimClient.ViewModels
             _tokens = tokens.ToArray();
             OnPropertyChanged("Tokens");
         }
+
+
+        void INimRow.RemoveToken()
+        {
+            TokenViewModel token = Tokens.Where(tok => tok.Enabled == true).First();
+            token.Tap();
+        }
     }
 }

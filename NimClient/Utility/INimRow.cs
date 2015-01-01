@@ -9,5 +9,7 @@ namespace NimClient.Utility
     interface INimRow
     {
         int TokenCount { get; }
+
+        void RemoveToken();
     }
 }

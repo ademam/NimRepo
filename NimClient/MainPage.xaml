@@ -48,11 +48,11 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <Button Content="Player Vs. Player" Click="PVP_Click"/>
-                <Button Content="Player Vs. AI" Command="{Binding Path=PVAIStart}" />
+                <Button Content="Player Vs. Player" Tap="PVP_Click"/>
+                <Button Content="Player Vs. AI" Tap="PVAI_Click" />
                 <Button Content="Secret of Nim" Command="{Binding Path=Explanation}" />
                 <Button Content="History of Nim" Command="{Binding Path=History}" />
-                <Button Content="Quit" Tap="QuitButton_Tap" />
+                <Button Content="Quit" Tap="Quit_Click" />
             </StackPanel>
 
         </Grid>
