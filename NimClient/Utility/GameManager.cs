@@ -4,11 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Threading;
 
 namespace NimClient.Utility
 {
     internal static class GameManager
     {
+        private static Dispatcher _dispatcher;
+
+        public static void SetDispatcher(Dispatcher dispatcher)
+        {
+            _dispatcher = dispatcher;
+        }
+
         public static bool IsVictory(INimRow[] rows)
         {
             int cnt = (from row in rows select row.TokenCount).Sum();
@@ -33,7 +41,9 @@ namespace NimClient.Utility
 
                 while (row.TokenCount > 1)
                 {
-                    row.RemoveToken();
+                    _dispatcher.BeginInvoke(() =>{
+                        row.RemoveToken();
+                    });
                     Thread.Sleep(500);
                 }
 
@@ -46,7 +56,10 @@ namespace NimClient.Utility
 
                 while (row.TokenCount > 0)
                 {
-                    row.RemoveToken();
+                    _dispatcher.BeginInvoke(() =>
+                    {
+                        row.RemoveToken();
+                    });
                     Thread.Sleep(500);
                 }
 
@@ -59,7 +72,10 @@ namespace NimClient.Utility
 
                 while (row.TokenCount > 1)
                 {
-                    row.RemoveToken();
+                    _dispatcher.BeginInvoke(() =>
+                    {
+                        row.RemoveToken();
+                    });
                     Thread.Sleep(500);
                 }
 
@@ -78,7 +94,10 @@ namespace NimClient.Utility
                 INimRow randrow = valrows[rand.Next(0, valrows.Length-1)];
                 while(randrow.TokenCount > rand.Next(0, randrow.TokenCount))
                 {
-                    randrow.RemoveToken();
+                    _dispatcher.BeginInvoke(() =>
+                    {
+                        randrow.RemoveToken();
+                    });
                     Thread.Sleep(500);
                 }
 
@@ -92,7 +111,10 @@ namespace NimClient.Utility
 
                     for(int i = 0; i < sum; i++)
                     {
-                        row.RemoveToken();
+                        _dispatcher.BeginInvoke(() =>
+                        {
+                            row.RemoveToken();
+                        });
                         Thread.Sleep(500);
                     }
 
@@ -106,7 +128,10 @@ namespace NimClient.Utility
 
                 do
                 {
-                    row.RemoveToken();
+                    _dispatcher.BeginInvoke(() =>
+                    {
+                        row.RemoveToken();
+                    });
                     Thread.Sleep(500);
                 }
                 while (CalculateNimSum(rows) != 0 && row.TokenCount > 0);

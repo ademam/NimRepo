@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using NimClient.Resources;
 using NimClient.ViewModels;
+using NimClient.Utility;
 
 namespace NimClient
 {
@@ -18,6 +19,7 @@ namespace NimClient
         public MainPage()
         {
             InitializeComponent();
+            GameManager.SetDispatcher(this.Dispatcher);
             // Sample code to localize the ApplicationBar
             //BuildLocalizedApplicationBar();
         }

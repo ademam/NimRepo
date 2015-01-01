@@ -122,19 +122,26 @@ namespace NimClient.ViewModels
             }
             else
             {
+                IsPlayable = false;
                 GameMessage = AI_TURN;
 
-                Task.
-                GameManager.CalculateAITurn(new INimRow[] { _row1, _row2, _row3, _row4 });
-                if(GameManager.IsVictory(new INimRow[] { _row1, _row2, _row3, _row4 }))
+                Task t = Task.Run(() =>
                 {
-                    IsPlayable = false;
-                    GameMessage = AI_WINS;
-                }
-                else
+                    GameManager.CalculateAITurn(new INimRow[] { _row1, _row2, _row3, _row4 });
+                    
+                }).ContinueWith(o =>
                 {
-                    GameMessage = PLAYER_TURN;
-                }
+                    if (GameManager.IsVictory(new INimRow[] { _row1, _row2, _row3, _row4 }))
+                    {
+                        IsPlayable = false;
+                        GameMessage = AI_WINS;
+                    }
+                    else
+                    {
+                        IsPlayable = true;
+                        GameMessage = PLAYER_TURN;
+                    }
+                }, TaskScheduler.FromCurrentSynchronizationContext());
             }
         }
 
