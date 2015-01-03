@@ -103,23 +103,20 @@ namespace NimClient.Utility
 
                 return;
             }
-            else if(rows.Where(row => row.TokenCount >= sum).Count() > 0)
+            else if (rows.Where(row => row.TokenCount >= sum).Count() > 0)
             {
-                //if(rows.Where(row => row.TokenCount == sum).Count() > 0) //a row with the eaxact num of tokens to remove
-                //{
-                    INimRow row = rows.Where(r => r.TokenCount >= sum).First();
+                INimRow row = rows.Where(r => r.TokenCount == sum).Count() > 0 ? rows.Where(r => r.TokenCount == sum).First() : rows.Where(r => r.TokenCount > sum).First();
 
-                    for(int i = 0; i < sum; i++)
+                for (int i = 0; i < sum; i++)
+                {
+                    _dispatcher.BeginInvoke(() =>
                     {
-                        _dispatcher.BeginInvoke(() =>
-                        {
-                            row.RemoveToken();
-                        });
-                        Thread.Sleep(500);
-                    }
+                        row.RemoveToken();
+                    });
+                    Thread.Sleep(500);
+                }
 
-                    return;
-                //}
+                return;
             }
             else
             {
