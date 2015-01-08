@@ -103,6 +103,21 @@ namespace NimClient.Utility
 
                 return;
             }
+            else if(rows.Where(row => (row.TokenCount & sum) == sum).Count() > 0)
+            {
+                INimRow row = rows.Where(r => (r.TokenCount & sum) == sum).First();
+
+                for (int i = 0; i < sum; i++)
+                {
+                    _dispatcher.BeginInvoke(() =>
+                    {
+                        row.RemoveToken();
+                    });
+                    Thread.Sleep(500);
+                }
+
+                return;
+            }
             else if (rows.Where(row => row.TokenCount >= sum).Count() > 0)
             {
                 INimRow row = rows.Where(r => r.TokenCount == sum).Count() > 0 ? rows.Where(r => r.TokenCount == sum).First() : rows.Where(r => r.TokenCount > sum).First();
