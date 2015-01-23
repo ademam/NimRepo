@@ -154,3 +154,6 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
+/NimClient/Views/secret.html
+/NimClient/Views/Secret.xaml
+/NimClient/Views/Secret.xaml.cs
