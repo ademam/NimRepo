@@ -41,6 +41,12 @@ namespace NimClient
             Application.Current.Terminate();
         }
 
+        private void Secret_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Uri uri = new Uri("/Views/Secret.xaml", UriKind.Relative);
+            NavigationService.Navigate(uri);
+        }
+
         // Sample code for building a localized ApplicationBar
         //private void BuildLocalizedApplicationBar()
         //{
