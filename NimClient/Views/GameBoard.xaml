@@ -30,16 +30,23 @@
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <StackPanel>
-                <StackPanel>
+                <StackPanel Visibility="{Binding Path=BoardVisible, Converter={StaticResource BoolToVis}}">
                     <nim:RowView Name="row1" DataContext="{Binding Path=Row1}" Tap="RowView1_Tap" />
                     <nim:RowView Name="row2" DataContext="{Binding Path=Row2}" Tap="RowView2_Tap"/>
                     <nim:RowView Name="row3" DataContext="{Binding Path=Row3}" Tap="RowView3_Tap"/>
                     <nim:RowView Name="row4" DataContext="{Binding Path=Row4}" Tap="RowView4_Tap"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Visibility="{Binding Path=MenuVisible, Converter={StaticResource BoolToVis}}">
                     <Button Name="OK_Button" Content="OK" Width="200" Tap="OKButton_Tap" 
                             Visibility="{Binding Path=IsPlayable, Converter={StaticResource BoolToVis}}"/>
                     <Button Content="QUIT" Width="200" Click="QuitButton_Click" />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Visibility="{Binding Path=QuestionVisible, Converter={StaticResource BoolToVis}}">
+                    <TextBlock Text="Go First?"></TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Name="YES_BUTTON" Content="YES" Width="200" Command="{Binding Path=YesFirst}"></Button>
+                        <Button Name="NO_BUTTON" Content="NO" Width="200" Command="{Binding Path=NoFirst}"></Button>
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
         </Grid>

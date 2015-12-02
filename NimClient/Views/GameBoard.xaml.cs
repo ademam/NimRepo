@@ -46,9 +46,6 @@ namespace NimClient.Views
             OK_Button.IsEnabled = false;
 
             ((GameBoardViewModel)this.DataContext).OKClick.Execute(null);
-
-            //BindingExpression be = ((Button)sender).GetBindingExpression(Button.CommandProperty);
-            //be.UpdateSource();
         }
 
         private void RowView2_Tap(object sender, System.Windows.Input.GestureEventArgs e)

@@ -53,10 +53,55 @@ namespace NimClient.ViewModels
             get { return _okclick ?? (_okclick = new RelayCommand((obj) => OKButtonClicked())); }
         }
 
+        public RelayCommand YesFirst
+        {
+            get { return _yesfirst ?? (_yesfirst = new RelayCommand((obj) => YesFirstClicked())); }
+        }
+
+        public RelayCommand NoFirst
+        {
+            get { return _nofirst ?? (_nofirst = new RelayCommand((obj) => NoFirstClicked())); }
+        }
+
+        private void NoFirstClicked()
+        {
+            BoardVisible = true;
+            MenuVisible = true;
+            QuestionVisible = false;
+            GameMessage = AI_TURN;
+            AINext();
+        }
+
+        private void YesFirstClicked()
+        {
+            BoardVisible = true;
+            MenuVisible = true;
+            QuestionVisible = false;
+            GameMessage = PLAYER_TURN;
+        }
+
         public bool IsPlayable
         {
             set { _isplayable = value; OnPropertyChanged("IsPlayable"); }
             get { return _isplayable; }
+        }
+
+        public bool BoardVisible
+        {
+            set { _boardvisible = value; OnPropertyChanged("BoardVisible"); }
+            get { return _boardvisible; }
+        }
+
+        public bool QuestionVisible
+        {
+            set { _questionvisible = value; OnPropertyChanged("QuestionVisible"); }
+            get { return _questionvisible; }
+        }
+
+        public bool MenuVisible
+        {
+            set { _menuvisible = value; OnPropertyChanged("MenuVisible"); }
+            get { return _menuvisible; }
         }
 
         public string GameType
@@ -91,8 +136,12 @@ namespace NimClient.ViewModels
         private void SetupAiGame()
         {
             _pvp = false;
-            GameMessage = PLAYER_TURN;
+
+            GameMessage = "Go First?";
             GameType = AI_GAME;
+            QuestionVisible = true;
+            MenuVisible = false;
+            BoardVisible = false;
 
             //AINext(); //todo Question first?
         }
@@ -100,6 +149,8 @@ namespace NimClient.ViewModels
         private void SetupPVPGame()
         {
             _pvp = true;
+            _boardvisible = true;
+            _menuvisible = true;
             GameMessage = PLAYER_ONE_TURN;
             GameType = PVP_GAME;
         }
@@ -181,5 +232,15 @@ namespace NimClient.ViewModels
 
         #endregion
 
+
+        public bool _questionvisible { get; set; }
+
+        public RelayCommand _yesfirst { get; set; }
+
+        public RelayCommand _nofirst { get; set; }
+
+        public bool _menuvisible { get; set; }
+
+        public bool _boardvisible { get; set; }
     }
 }
